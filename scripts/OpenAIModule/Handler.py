@@ -57,7 +57,7 @@ class OpenAIChatBot:
                     responses.append(f"Image URL: {content.image_url.url} - Detail: {content.image_url.detail}")
             return responses
         else:
-            return [f"Text: {latest_message.content}"]
+            return [f"🤖 {latest_message.content}"]
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
