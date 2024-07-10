@@ -52,7 +52,7 @@ class OpenAIChatBot:
             responses = []
             for content in latest_message.content:
                 if content.type == 'text':
-                    responses.append(f"Text: {content.text.value}")
+                    responses.append(f"{content.text.value}")
                 elif content.type == 'image_url':
                     responses.append(f"Image URL: {content.image_url.url} - Detail: {content.image_url.detail}")
             return responses
@@ -91,8 +91,8 @@ if st.button("Enviar Mensagem"):
     
     bot.create_chat(message_content)
     responses = bot._retrieve_latest_message()
-    
-    st.write("Respostas do Bot:")
+
+    st.write("Resposta 🤖:")
     for response in responses:
         st.write(response)
 
