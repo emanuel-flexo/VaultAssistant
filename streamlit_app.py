@@ -71,15 +71,17 @@ bot = OpenAIChatBot(api_key, assistant_id)
 user_message = st.text_area("Mensagem de Texto")
 
 uploaded_file = st.file_uploader("Carregar uma imagem", type=["png", "jpg", "jpeg"])
-
+if uploaded_file:
+    temp_dir = tempfile.mkdtemp()
+    path = os.path.join(temp_dir, uploaded_file.name)
+    with open(path, "wb") as f:
+        f.write(uploaded_file.getvalue())
+    st.image(path)
+    
 if st.button("Enviar Mensagem"):
     if user_message:
         message_content = [{"type": "text", "text": user_message}]
-    if uploaded_file:
-        temp_dir = tempfile.mkdtemp()
-        path = os.path.join(temp_dir, uploaded_file.name)
-        with open(path, "wb") as f:
-            f.write(uploaded_file.getvalue())
+    
         file= bot.create_file(path)
         image_file = file.id 
         if user_message:
